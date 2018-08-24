@@ -5,14 +5,13 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
-        maven {
-            url 'https://plugins.gradle.org/m2/'
-        }
+        maven { url 'https://plugins.gradle.org/m2/'}
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
 		classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath("com.bmuschko:gradle-docker-plugin:3.6.1")
 	}
 }
 
@@ -22,9 +21,11 @@ apply plugin: 'kotlin-spring'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.bmuschko.docker-spring-boot-application'
+apply plugin: 'com.bmuschko.docker-remote-api'
 
 group = 'com.poll'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = 1.8
 compileKotlin {
 	kotlinOptions {
@@ -41,6 +42,7 @@ compileTestKotlin {
 
 repositories {
 	mavenCentral()
+    jcenter()
 }
 
 
@@ -50,6 +52,55 @@ dependencies {
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+import com.bmuschko.gradle.docker.tasks.container.DockerCreateContainer
+import com.bmuschko.gradle.docker.tasks.container.DockerStartContainer
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+
+task createDockerfile(type: Dockerfile) {
+    group 'docker'
+    description 'Creates docker file in the build directory.'
+    destFile = project.file('build/docker/Dockerfile')
+    from 'openjdk:8-jre-alpine'
+    maintainer 'Priti Biyani "priti.biyani6@gmail.com"'
+    copyFile war.archiveName, '/app/polling-web-service.war'
+    entryPoint 'java'
+    defaultCommand '-jar', '/app/polling-web-service.war'
+    exposePort 8080
+//    runCommand 'apk --update --no-cache add curl'
+//    instruction 'HEALTHCHECK CMD curl -f http://localhost:8080/health || exit 1'
+}
+
+task syncWebAppArchive(type: Sync) {
+    dependsOn assemble
+    from war.archivePath
+    into createDockerfile.destFile.parentFile
+}
+
+createDockerfile.dependsOn syncWebAppArchive
+
+task buildImage(type: DockerBuildImage) {
+    group 'docker'
+    description 'Task similar to dokcerBuildImage, except custom tag.'
+    dependsOn createDockerfile
+    inputDir = createDockerfile.destFile.parentFile
+    tag = "pritibiy/polling-web-service:$war.version"
+}
+
+task createContainer(type: DockerCreateContainer) {
+    group 'docker'
+    dependsOn buildImage
+    exposedPorts =['80/tcp':80]
+    targetImageId {buildImage.getTag()}
+}
+
+
+task startContainer(type:DockerStartContainer){
+    group 'docker'
+    dependsOn createContainer
+    targetContainerId { createContainer.targetImageId() }
 }
 
 
