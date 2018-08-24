@@ -92,15 +92,16 @@ task buildImage(type: DockerBuildImage) {
 task createContainer(type: DockerCreateContainer) {
     group 'docker'
     dependsOn buildImage
-    exposedPorts =['80/tcp':80]
+    portBindings = ['8080:8080']
     targetImageId {buildImage.getTag()}
+    containerName = 'polling-web-service'
 }
 
 
 task startContainer(type:DockerStartContainer){
     group 'docker'
     dependsOn createContainer
-    targetContainerId { createContainer.targetImageId() }
+    targetContainerId { createContainer.getContainerId()}
 }
 
 
