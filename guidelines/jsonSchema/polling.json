@@ -1,0 +1,23 @@
+{
+  "name": "Service Feedback",
+  "description": "Capture data related to service A ",
+  "polling_id": "",
+  "created_at": "",
+  "created_by": "",
+
+  "questions": [
+    {
+      "question_id":"",
+      "short_text": "",
+      "description": "",
+      "type": "SCORE"
+    }
+  ],
+  "link": {
+    "URI": "",
+    "Short_url": "",
+    "validity": "",
+    "expired": true
+  }
+}
+

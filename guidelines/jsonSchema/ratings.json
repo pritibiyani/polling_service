@@ -1,0 +1,16 @@
+{
+
+  "user":{
+    "name":"",
+    "email_id":""
+  },
+  "filled_at":"",
+  "questions":[
+    {
+      "short_text":"",
+      "description":"",
+      "type": "SCORE",
+      "rating":"1"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+- There are many different types of objects, and it is not practical to put each type of object in its own table.

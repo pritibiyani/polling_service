@@ -1,5 +1,8 @@
 ## Polling Service
 
+[![Build Status](https://api.travis-ci.com/pritibiyani/polling_service.svg?branch=master
+)](https://travis-ci.com/pritibiyani/polling_service)
+
 ## Customer Feedback System
 
 ### MVP
