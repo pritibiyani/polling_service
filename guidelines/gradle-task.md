@@ -1,7 +1,8 @@
 Links: 
 1. Plugin used: [https://github.com/bmuschko/gradle-docker-plugin](https://github.com/bmuschko/gradle-docker-plugin)
 2. [Documentation](http://bmuschko.github.io/gradle-docker-plugin/#spring_boot_application_plugin)
-3. [Custom tasks available](http://bmuschko.github.io/gradle-docker-plugin/#remote_api_plugin) 
+3. [Custom tasks available](http://bmuschko.github.io/gradle-docker-plugin/#remote_api_plugin)
+4. [Blog Link](https://bmuschko.com/blog/dockerized-spring-boot-app/) 
 
 
 Issues faced:

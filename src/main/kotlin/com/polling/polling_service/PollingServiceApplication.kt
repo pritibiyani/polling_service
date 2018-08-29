@@ -12,9 +12,9 @@ data class Demo(val text: String, val priority: String)
 
 @RestController
 class DemoController {
-    @RequestMapping("/message-demo")
-    fun message(): Demo {
-        return Demo("Hello world!", "High")
+    @RequestMapping("/")
+    fun message(): String {
+        return "Hello World!"
     }
 }
 
