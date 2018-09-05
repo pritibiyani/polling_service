@@ -6,7 +6,7 @@ import java.util.*
 
 class UniqueIdGenerator{
     companion object Factory{
-        val nameSpace = "some-namespace"
+        private const val nameSpace = "some-namespace"
 
         fun byName(name: String): String {
             val string = nameSpace + name + LocalDateTime.now()
