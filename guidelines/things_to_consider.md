@@ -5,3 +5,7 @@
 4. [REsponse caching](https://www.safaribooksonline.com/library/view/spring-microservices-with/9781789132588/ch02s07.html) 
 5. Would questions will be HATEOAS in this one? [link](https://www.safaribooksonline.com/library/view/spring-microservices-with/9781789132588/ch02s02.html)
 6. Validation provided by spring [Link] (https://www.safaribooksonline.com/library/view/spring-microservices-with/9781789132588/ch02s03.html)
+
+
+1. What is constructor injection? What's preferred way?
+2. 
