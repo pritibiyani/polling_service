@@ -2,7 +2,7 @@ package com.polling.polling_service.poll.domain
 
 //package com.polling.polling_service.poll.domain
 
-import com.polling.polling_service.common.MyDateTime
+import com.polling.polling_service.common.DateTimeWrapper
 import com.polling.polling_service.operation.SavePollOperation
 import com.polling.polling_service.poll.web.InputPoll
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,7 +22,7 @@ class PollService {
 
     //    TOdo: Just using name as of now. Later will user name + username
     private fun generateLink(name: String): String {
-        val inputString = name + MyDateTime().getCurrentDateTime()
+        val inputString = name + DateTimeWrapper().getCurrentDateTime()
         val md = MessageDigest.getInstance("MD5")
         val digest = md.digest(inputString.toByteArray())
 
