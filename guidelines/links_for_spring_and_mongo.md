@@ -21,3 +21,8 @@ Books:
 1. https://www.safaribooksonline.com/library/view/spring-boot-20/9781787129825/4f31b7c8-e933-4256-9460-3fb1686003ca.xhtml
 2. Kotlin by example: https://www.safaribooksonline.com/library/view/kotlin-programming-by/9781788474542/c336c4ff-6c3d-464b-a148-f0f967c6d95e.xhtml
 3. 
+
+
+Mongo: 
+1. Must read: https://www.mongodb.com/blog/post/thinking-documents-part-2?jmp=docs
+2. HOw to design document with many to one relationship: https://docs.mongodb.com/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/index.html
