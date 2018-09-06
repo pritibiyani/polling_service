@@ -1,4 +1,4 @@
-package com.polling.polling_service.polling.common
+package com.polling.polling_service.common
 
 import java.time.LocalDateTime
 import java.util.*

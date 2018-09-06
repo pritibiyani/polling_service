@@ -1,17 +1,16 @@
 package com.polling.polling_service.poll.web
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.polling.polling_service.polling.poll.domain.OutputPoll
-import com.polling.polling_service.polling.poll.domain.PollService
-import com.polling.polling_service.polling.poll.web.InputPoll
-import com.polling.polling_service.polling.poll.web.InputQuestion
-import com.polling.polling_service.polling.poll.web.PollResource
+import com.polling.polling_service.PollingServiceApplication
+import com.polling.polling_service.poll.domain.OutputPoll
+import com.polling.polling_service.poll.domain.PollService
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.http.MediaType
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
@@ -45,7 +44,6 @@ class PollResourceTest {
         val outputPoll = OutputPoll("random ID", "unique-link")
         val expectedResult = mapper.writeValueAsString(outputPoll)
 
-        println(mapper.writeValueAsString(inputPoll))
         `when`(pollService.createPoll(inputPoll)).thenReturn(outputPoll)
         mvc.perform(
                 MockMvcRequestBuilders.post("/poll")

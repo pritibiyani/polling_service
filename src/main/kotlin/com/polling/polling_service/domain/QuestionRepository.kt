@@ -1,8 +1,9 @@
-package com.polling.polling_service.polling.link
+package com.polling.polling_service.domain
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface LinkRepository : CrudRepository<LinkDocument, UUID>
+interface QuestionRepository:CrudRepository<QuestionDocument, UUID> {
+}

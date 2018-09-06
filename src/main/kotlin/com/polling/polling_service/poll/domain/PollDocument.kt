@@ -1,4 +1,4 @@
-package com.polling.polling_service.polling.poll.domain
+package com.polling.polling_service.poll.domain
 
 import org.springframework.data.annotation.TypeAlias
 import org.springframework.data.mongodb.core.mapping.Document

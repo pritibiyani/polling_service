@@ -1,4 +1,4 @@
-package com.polling.polling_service.polling.question.domain
+package com.polling.polling_service.domain
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.TypeAlias

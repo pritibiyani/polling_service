@@ -1,7 +1,7 @@
-package com.polling.polling_service.polling.poll.web
+package com.polling.polling_service.poll.web
 
-import com.polling.polling_service.polling.poll.domain.OutputPoll
-import com.polling.polling_service.polling.poll.domain.PollService
+import com.polling.polling_service.poll.domain.OutputPoll
+import com.polling.polling_service.poll.domain.PollService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -16,7 +16,6 @@ class PollResource{
 
     @PostMapping("/poll")
     fun createPoll(@RequestBody inputPoll: InputPoll):ResponseEntity<OutputPoll> {
-        println(inputPoll)
         val poll = pollService.createPoll(inputPoll)
         return ResponseEntity(poll, HttpStatus.CREATED)
     }

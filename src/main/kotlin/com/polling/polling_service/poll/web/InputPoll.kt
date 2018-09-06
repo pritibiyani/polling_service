@@ -1,4 +1,4 @@
-package com.polling.polling_service.polling.poll.web
+package com.polling.polling_service.poll.web
 
 data class InputPoll(
         val name: String,

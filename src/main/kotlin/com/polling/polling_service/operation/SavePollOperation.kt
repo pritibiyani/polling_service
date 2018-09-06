@@ -1,19 +1,19 @@
-package com.polling.polling_service.polling.operation
+package com.polling.polling_service.operation
 
-import com.polling.polling_service.polling.poll.web.InputPoll
-import com.polling.polling_service.polling.poll.web.InputQuestion
-import com.polling.polling_service.polling.common.UniqueIdGenerator
-import com.polling.polling_service.polling.link.LinkDocument
-import com.polling.polling_service.polling.link.LinkRepository
-import com.polling.polling_service.polling.poll.domain.OutputPoll
-import com.polling.polling_service.polling.poll.domain.PollDocument
-import com.polling.polling_service.polling.poll.domain.PollRepository
-import com.polling.polling_service.polling.question.domain.QuestionDocument
-import com.polling.polling_service.polling.question.domain.QuestionRepository
+import com.polling.polling_service.common.UniqueIdGenerator
+import com.polling.polling_service.link.domain.LinkDocument
+import com.polling.polling_service.link.domain.LinkRepository
+import com.polling.polling_service.poll.domain.OutputPoll
+import com.polling.polling_service.poll.domain.PollDocument
+import com.polling.polling_service.poll.domain.PollRepository
+import com.polling.polling_service.poll.web.InputPoll
+import com.polling.polling_service.poll.web.InputQuestion
+import com.polling.polling_service.domain.QuestionDocument
+import com.polling.polling_service.domain.QuestionRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
-@Component
+@Component("SavePollOperation")
 class SavePollOperation : ISavePollOperation {
     @Autowired
     lateinit var questionRepository: QuestionRepository
@@ -25,17 +25,19 @@ class SavePollOperation : ISavePollOperation {
     lateinit var pollRepository: PollRepository
 
     override fun perform(inputPoll: InputPoll, link: String): OutputPoll {
-        val link = this.getLink(inputPoll.name)
+        val link = this.getLink(link)
         val poll = this.getPoll(inputPoll, link.id)
 
         questionRepository.saveAll(this.getQuestions(inputPoll.questions, poll.id))
         linkRepository.save(link)
         pollRepository.save(poll)
-        return OutputPoll(poll.id, link.path)
+        return OutputPoll(poll.id, link.longURL)
     }
 
-    private fun getLink(name: String): LinkDocument {
-        return LinkDocument(UniqueIdGenerator.byName(name), "some-random-path")
+    private fun getLink(uniquePath: String): LinkDocument {
+        return LinkDocument(
+                uniquePath,
+                "/polls/$uniquePath")
     }
 
     private fun getPoll(inputPoll: InputPoll, linkID: String): PollDocument {
@@ -49,7 +51,7 @@ class SavePollOperation : ISavePollOperation {
 
     private fun getQuestions(questions: List<InputQuestion>, pollID: String): List<QuestionDocument> {
         return questions.map { q ->
-            QuestionDocument (
+            QuestionDocument(
                     UniqueIdGenerator.byTime(),
                     q.shortText,
                     q.description,

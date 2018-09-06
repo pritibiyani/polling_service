@@ -1,7 +1,7 @@
 package com.polling.polling_service
 
-import com.polling.polling_service.polling.poll.web.InputPoll
-import com.polling.polling_service.polling.poll.web.InputQuestion
+import com.polling.polling_service.poll.web.InputPoll
+import com.polling.polling_service.poll.web.InputQuestion
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
